@@ -23,8 +23,10 @@
 import flask
 from flask import Flask, request
 import json
-from flask import render_template, send_from_directory, current_app, request, jsonify, make_response
+from flask import render_template, send_from_directory, current_app, request, jsonify, make_response, send_file
 import re
+
+#from flask.wrappers import Response
 
 app = Flask(__name__)
 app.debug = True
@@ -80,9 +82,9 @@ def flask_post_json():
 @app.route("/")
 def hello():
     '''Return something coherent here.. perhaps redirect to /static/index.html '''
-    #return send_from_directory('static', "index.html")
-    return current_app.send_static_file("index.html")
-
+    return send_from_directory('static', "index.html")
+    #return current_app.send_static_file("static/index.html")
+    #return Response(send_from_directory('static', "index.html"), status=200, mimetype="text/html")
 
 @app.route("/entity/<entity>", methods=['POST', 'PUT'])
 def update(entity):
@@ -92,18 +94,15 @@ def update(entity):
     #if request.is_json:
     json_data = myWorld.get(entity)
     #print('target_entity: ' + str(json_data))
+    request_json = flask_post_json()
     if json_data:
-        request_json = flask_post_json()
         for key, value in request_json.items():
             myWorld.update(entity, key, value)
-        new_entity = myWorld.get(entity)
-        return make_response(jsonify(new_entity), 200)
 
     else:
-        request_json = flask_post_json()
         myWorld.set(entity, request_json)
-        new_entity = myWorld.get(entity)
-        return make_response(jsonify(new_entity), 200)
+    new_entity = myWorld.get(entity)
+    return make_response(jsonify(new_entity), 200)
     '''
     else:
         print('check3')
@@ -133,7 +132,10 @@ def clear():
     myWorld.clear()
     world = myWorld.world()
     return make_response(jsonify(world), 200)
-
-
+'''
+@app.route("/json2.js")
+def send_js():
+    return send_from_directory('static', "json2.js")
+'''
 if __name__ == "__main__":
     app.run()
