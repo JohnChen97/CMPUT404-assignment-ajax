@@ -63,7 +63,10 @@
 
 
         world = {};
-
+        function randomColor() {
+            color = 'rgb(' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ')';
+            return color;
+        }
         //XXX: TODO Make this prettier!
         function drawCircle(context, entity) {
             with (context) {
@@ -79,6 +82,10 @@
                 //arc(x, y, (entity["radius"]) ? entity["radius"] : 50, 0, 2.0 * Math.PI, false);
                 console.log(randomCounterclockwise())
                 arc(x, y, (entity["radius"]) ? entity["radius"] = randomGenerator(10, 50) : randomGenerator(10, 50), Math.random() * Math.PI, randomGenerator(0, 2.0) * Math.PI, randomCounterclockwise());
+                var generatedColor = randomColor();
+                fillStyle = generatedColor;
+                strokeStyle = generatedColor;
+                fill();
                 stroke();
             }
         }
@@ -281,10 +288,10 @@
 
         // Add the application specific mouse listeners!
         //XXX: TODO Make these prettier!
-        function randomColor() {
-            color = 'rgb(' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ')';
-            return color;
-        }
+        //function randomColor() {
+            //color = 'rgb(' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ')';
+            //return color;
+        //}
         mouse.mousedowners.push(function (x, y, clicked, e) {
             addEntityWithoutName({ 'x': x, 'y': y, 'colour': 'blue' });
         });
