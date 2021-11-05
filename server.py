@@ -92,9 +92,7 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST', 'PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    #myWorld.update(entity)
-    #print(request.is_json)
-    #if request.is_json:
+    
     json_data = myWorld.get(entity)
     #print('target_entity: ' + str(json_data))
     request_json = flask_post_json()
