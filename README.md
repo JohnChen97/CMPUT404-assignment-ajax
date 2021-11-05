@@ -14,4 +14,4 @@ Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
 
 CCID: jionghao
 
-Collaborator CCID: renyu
+Collaborator CCID: renyu jxiang2
