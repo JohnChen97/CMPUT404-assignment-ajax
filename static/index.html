@@ -164,7 +164,7 @@
 
                 }
             }
-            xhr.open('POST', 'http://127.0.0.1:5000/entity/' + entity, true);
+            xhr.open('POST', '/entity/' + entity, true);
             xhr.setRequestHeader('Content-type', "text/html")
 
             xhr.send(JSON.stringify(data));
@@ -312,7 +312,7 @@
                 };
             };
 
-            xhr.open('GET', 'http://127.0.0.1:5000/world', true);
+            xhr.open('GET', '/world', true);
             xhr.setRequestHeader('Accept', "application/json");
             xhr.send();
             drawNextFrame()
