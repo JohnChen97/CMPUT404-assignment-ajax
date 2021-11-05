@@ -26,6 +26,9 @@ import json
 from flask import render_template, send_from_directory, current_app, request, jsonify, make_response, send_file
 import re
 
+
+
+
 #from flask.wrappers import Response
 
 app = Flask(__name__)
@@ -82,9 +85,9 @@ def flask_post_json():
 @app.route("/")
 def hello():
     '''Return something coherent here.. perhaps redirect to /static/index.html '''
-    return send_from_directory('static', "index.html")
-    #return current_app.send_static_file("static/index.html")
-    #return Response(send_from_directory('static', "index.html"), status=200, mimetype="text/html")
+    #return send_from_directory('static', "index.html")
+    
+    return flask.redirect(flask.url_for('static', filename="index.html"))
 
 @app.route("/entity/<entity>", methods=['POST', 'PUT'])
 def update(entity):
@@ -139,3 +142,4 @@ def send_js():
 '''
 if __name__ == "__main__":
     app.run()
+    
